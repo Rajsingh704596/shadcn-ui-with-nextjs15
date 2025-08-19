@@ -1,3 +1,5 @@
+import Header from "@/components/Header";
+
 import Link from "next/link";
 
 export default function Home() {
@@ -19,6 +21,9 @@ export default function Home() {
           </li>
         </ul>
       </div>
+
+      {/* cn function use case like dark mode  */}
+      <Header />
     </div>
   );
 }
