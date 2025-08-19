@@ -120,3 +120,72 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Define the keyframes and custom animation in @theme */
+@theme {
+  --animate-gradient-border: gradient-border 3s linear infinite;
+
+  @keyframes gradient-border {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+}
+
+/* /* Define the global styles for the gradient border animation */
+@layer utilities {
+  .animate-gradient-border {
+    background: linear-gradient(45deg, #00c9ff, #f951d5, #9b59b6);
+    background-size: 400% 400%;
+    border-radius: 1rem;
+    padding: 4px; /* Optional, to give some space around the text */
+    background-position: 0% 50%;
+    animation: var(--animate-gradient-border);
+  }
+}
+
+@import "tailwindcss";
+
+/* Define the keyframes and custom animation in @theme */
+@theme {
+  --animate-gradient-text: gradient-text 3s linear infinite;
+
+  @keyframes gradient-text {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+}
+
+/* Define the global styles for the animated gradient text */
+@layer utilities {
+  .animate-gradient-text {
+    background: linear-gradient(45deg, #f93737, #6d51f9, #5997b6);
+    background-size: 400% 400%;
+    background-position: 0% 50%;
+    -webkit-background-clip: text; /* For Safari */
+    background-clip: text;
+    color: transparent; /* Make text color transparent so the background gradient shows */
+    animation: var(--animate-gradient-text); /* Apply the gradient animation */
+  }
+
+  .flex-box {
+    @apply flex justify-center items-center;
+  }
+
+  .heading {
+    @apply text-5xl font-extrabold tracking-wide bg-gradient-to-tr from-indigo-600 via-cyan-500 to-blue-400 bg-clip-text text-transparent;
+  }
+}
