@@ -13,17 +13,21 @@ export default function Home() {
           TypeScript
         </h1>
       </div>
+
+      {/* cn function use case like dark mode  */}
+      <Header />
+
       {/* All Component */}
       <div className="flex-box mt-10 text-xl text-blue-500 font-bold">
         <ul>
           <li>
             <Link href={"/pages/button"}>Button Component</Link>
           </li>
+          <li>
+            <Link href={"/pages/dialog-modal"}>Dialog/Modal Component</Link>
+          </li>
         </ul>
       </div>
-
-      {/* cn function use case like dark mode  */}
-      <Header />
     </div>
   );
 }
