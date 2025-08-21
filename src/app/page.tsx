@@ -26,6 +26,9 @@ export default function Home() {
           <li>
             <Link href={"/pages/dialog-modal"}>Dialog/Modal Component</Link>
           </li>
+          <li>
+            <Link href={"/pages/drawer"}>Drawer Component</Link>
+          </li>
         </ul>
       </div>
     </div>
