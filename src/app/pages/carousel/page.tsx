@@ -16,6 +16,8 @@ export default function CarouselSize() {
       <Carousel1 />
       {/* eg.2 */}
       <CarouselPlugin2 />
+      {/* e.g 3 with api image */}
+      <ApiImageCarousel3 />
     </>
   );
 }
@@ -34,7 +36,7 @@ export const Carousel1 = () => {
         {Array.from({ length: 10 }).map((_, index) => (
           <CarouselItem
             key={index}
-            className=" sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5"
+            className=" sm:basis-1/2 md:basis-1/3 lg:basis-1/4 xl:basis-1/5 px-2"
             //  basis utility cls used for size of every card
           >
             <div className="p-1">
@@ -57,6 +59,7 @@ export const Carousel1 = () => {
 // npm i embla-carousel-autoplay
 
 import Autoplay, { type AutoplayType } from "embla-carousel-autoplay";
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 export function CarouselPlugin2() {
@@ -72,7 +75,7 @@ export function CarouselPlugin2() {
   return (
     <Carousel
       plugins={autoplayPlugin ? [autoplayPlugin] : []}
-      className="w-full max-w-xs mx-auto mt-10"
+      className="w-full max-w-3xl mx-auto mt-10"
       onMouseEnter={() => autoplayPlugin?.stop()}
       onMouseLeave={() => autoplayPlugin?.play()}
       opts={{
@@ -82,11 +85,22 @@ export function CarouselPlugin2() {
     >
       <CarouselContent>
         {Array.from({ length: 5 }).map((_, index) => (
-          <CarouselItem key={index} className="basis-1/3">
+          <CarouselItem key={index} className="basis-full md:basis-1/3">
             <div className="p-1">
               <Card>
-                <CardContent className="flex aspect-square items-center justify-center p-6">
-                  <span className="text-4xl font-semibold">{index + 1}</span>
+                <CardContent className="relative w-full aspect-video overflow-hidden">
+                  <Image
+                    src="https://images.pexels.com/photos/30681794/pexels-photo-30681794.jpeg"
+                    alt="test"
+                    className="object-cover"
+                    fill
+                    priority
+                  />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <span className="text-4xl font-semibold text-white opacity-50 drop-shadow">
+                      {index + 1}
+                    </span>
+                  </div>
                 </CardContent>
               </Card>
             </div>
@@ -96,5 +110,81 @@ export function CarouselPlugin2() {
       <CarouselPrevious />
       <CarouselNext />
     </Carousel>
+  );
+}
+
+// Example-3
+//! Picsum Api call and image render in carousel
+
+// "use client"
+
+// import React, { useEffect, useState } from "react"
+// import Autoplay, { type AutoplayType } from "embla-carousel-autoplay"
+// import {
+//   Carousel,
+//   CarouselContent,
+//   CarouselItem,
+//   CarouselNext,
+//   CarouselPrevious,
+// } from "@/components/ui/carousel"
+// import { Card, CardContent } from "@/components/ui/card"
+
+interface ImageItem {
+  id: string;
+  author: string;
+  download_url: string;
+}
+
+export function ApiImageCarousel3() {
+  const [images, setImages] = useState<ImageItem[]>([]);
+  const [autoplayPlugin, setAutoplayPlugin] = useState<AutoplayType | null>(
+    null
+  );
+
+  // Fetch images from API
+  useEffect(() => {
+    fetch("https://picsum.photos/v2/list?page=2&limit=5")
+      .then((res) => res.json())
+      .then((data: ImageItem[]) => setImages(data))
+      .catch((err) => console.error("Failed to fetch images", err));
+  }, []);
+
+  // Initialize autoplay plugin
+  useEffect(() => {
+    const plugin = Autoplay({ delay: 2500, stopOnInteraction: true });
+    setAutoplayPlugin(plugin);
+  }, []);
+
+  return (
+    <div className="w-full max-w-2xl mx-auto mt-10">
+      <Carousel
+        plugins={autoplayPlugin ? [autoplayPlugin] : []}
+        onMouseEnter={() => autoplayPlugin?.stop()}
+        onMouseLeave={() => autoplayPlugin?.play()}
+        opts={{ align: "center", loop: true }}
+      >
+        <CarouselContent>
+          {images.map((img) => (
+            <CarouselItem key={img.id}>
+              <div className="p-2">
+                <Card>
+                  <CardContent className="aspect-video overflow-hidden p-0">
+                    <Image
+                      src={img.download_url}
+                      alt={img.author}
+                      width={200}
+                      height={200}
+                      className="w-full h-full object-cover"
+                    />
+                  </CardContent>
+                </Card>
+              </div>
+            </CarouselItem>
+          ))}
+        </CarouselContent>
+        <CarouselPrevious />
+        <CarouselNext />
+      </Carousel>
+    </div>
   );
 }
