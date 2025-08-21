@@ -29,6 +29,9 @@ export default function Home() {
           <li>
             <Link href={"/pages/drawer"}>Drawer Component</Link>
           </li>
+          <li>
+            <Link href={"/pages/carousel"}>Carousel Component</Link>
+          </li>
         </ul>
       </div>
     </div>
