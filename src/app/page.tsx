@@ -32,6 +32,9 @@ export default function Home() {
           <li>
             <Link href={"/pages/carousel"}>Carousel Component</Link>
           </li>
+          <li>
+            <Link href={"/pages/sheet"}>Sheet Component</Link>
+          </li>
         </ul>
       </div>
     </div>
