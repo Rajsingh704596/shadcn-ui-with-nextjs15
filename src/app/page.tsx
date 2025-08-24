@@ -35,6 +35,9 @@ export default function Home() {
           <li>
             <Link href={"/pages/sheet"}>Sheet Component</Link>
           </li>
+          <li>
+            <Link href={"/pages/sooner-toaster"}>Sooner/toaster Component</Link>
+          </li>
         </ul>
       </div>
     </div>
