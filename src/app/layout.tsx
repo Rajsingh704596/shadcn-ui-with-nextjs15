@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Toaster } from "@/components/ui/sonner";
+import { ThemeProvider } from "@/components/theme-provider";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,22 +29,31 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased dark:bg-dark-background dark:text-dark-foreground`}
       >
-        {/* Add the Toaster Component in Root 
-        layout (Render toaster at root layout*/}
-        <Toaster position="top-right" expand={false} richColors />
-        {/* As a props we can pass position also like top-left/top-center/top-right/bottom-left/bottom-center/bottom-right  and default-color, and expand-{true/false} */}
-        {children}
+        {/*Add the ThemeProvider to your root layout and add the suppressHydrationWarning prop to the html tag.  */}
 
-        {/* we can pass multiple toaster */}
-        <Toaster
-          id="global"
-          position="top-center"
-          expand
-          visibleToasts={5} // 5 toasts will be visible
-          offset={16} // all sides will have 16px offset
-          mobileOffset={{ bottom: "16px" }}
-        />
-        <Toaster id="canvas" position="bottom-right" offset="10vh" />
+        <ThemeProvider
+          attribute="class"
+          defaultTheme="system"
+          enableSystem
+          disableTransitionOnChange
+        >
+          {/* Add the Toaster Component in Root 
+        layout (Render toaster at root layout*/}
+          <Toaster position="top-right" expand={false} richColors />
+          {/* As a props we can pass position also like top-left/top-center/top-right/bottom-left/bottom-center/bottom-right  and default-color, and expand-{true/false} */}
+          {children}
+
+          {/* we can pass multiple toaster */}
+          <Toaster
+            id="global"
+            position="top-center"
+            expand
+            visibleToasts={5} // 5 toasts will be visible
+            offset={16} // all sides will have 16px offset
+            mobileOffset={{ bottom: "16px" }}
+          />
+          <Toaster id="canvas" position="bottom-right" offset="10vh" />
+        </ThemeProvider>
       </body>
     </html>
   );
