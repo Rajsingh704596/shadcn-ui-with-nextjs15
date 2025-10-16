@@ -41,6 +41,30 @@ export default function Home() {
           <li>
             <Link href={"/pages/accordion"}>Accordion Component</Link>
           </li>
+          <li>
+            <Link href={"/pages/alert"}>Alert Component</Link>
+          </li>
+          <li>
+            <Link href={"/pages/alert-dialog"}>Alert Dialog Component</Link>
+          </li>
+          <li>
+            <Link href={"/pages/aspect-ratio"}>Aspect Ratio Component</Link>
+          </li>
+          <li>
+            <Link href={"/pages/avatar"}>Avatar Component</Link>
+          </li>
+          <li>
+            <Link href={"/pages/badge"}>Badge Component</Link>
+          </li>
+          <li>
+            <Link href={"/pages/breadcrumb"}>Breadcrumb Component</Link>
+          </li>
+          <li>
+            <Link href={"/pages/button-group"}>Button Group Component</Link>
+          </li>
+          <li>
+            <Link href={"/pages/calendar"}>Calendar Component</Link>
+          </li>
         </ul>
       </div>
     </div>
